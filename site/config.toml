@@ -24,7 +24,7 @@ pygmentscodefencesguesssyntax = true
     favicon_32 = "/img/little_w.png"
     favicon_16 = "/img/little_w.png"
 
-    dateformat = "January 2, 2006"
+    dateformat = "2006-01-02"
 
     hideCredits = false
     hideCopyright = false
@@ -51,7 +51,7 @@ pygmentscodefencesguesssyntax = true
 [[menu.main]]
     name = "Blog"
     weight = 1
-    url  = "/post/"
+    url  = "/posts/"
 [[menu.main]]
     name = "About"
     weight = 2

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Evgen Pyanykh">
+    <meta name="description" content="Evgen Pyanykh&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="http://localhost:1313">
+    <title>
+  Оптимизация freelance биржи · Evgen Pyanykh
+</title>
+
+    <link rel="canonical" href="http://localhost:1313/posts/2015-05-22-%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-freelance-%D0%B1%D0%B8%D1%80%D0%B6%D0%B8/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="http://localhost:1313/css/coder.min.578f8fce262e4c448c239b69661084c57507b89d51b8d04de15cd1d8f8135600.css" integrity="sha256-V4&#43;PziYuTESMI5tpZhCExXUHuJ1RuNBN4VzR2PgTVgA=" media="screen">
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://localhost:1313/img/little_w.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://localhost:1313/img/little_w.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.49" />
+  </head>
+
+  <body class="">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://localhost:1313">
+      Evgen Pyanykh
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/contact/">Contact me</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <h1 class="title">Оптимизация freelance биржи</h1>
+        <h2 class="date">2015-05-22</h2>
+      </header>
+
+      <div>
+        <p><img src="http://localhost:1313/img/big.jpeg" alt="img0" /></p>
+
+<p>Одна из главных моих болезней это все автоматизировать и реализовывать универсальные решения даже там где это не нужно. Но некоторые идеи могут оказаться полезными и облегчают жизнь. Один из таких проектов это оповещение о новых и интересных проектах на фриланс биржах.</p>
+
+<p>Удобство заключается в том, что пользователю не нужно постоянно просматривать сайт на наличие интересующих его проектов. Выбрав интересующею категорию проектов и вводит перечень ключевых слов через пробел и в последствии скрипт с выбранной периодичностью заходит на сайт и проверяет проекты и сканирует текст на наличие ключевых слов. Если находит совпадение то шлет оповещение на Email текст и ссылку на проект. Интерфейс сервиса будет состоять из поля для ввода Email, select с категориями, text для ключевых слов, и checkbox для сайтов бирж.
+Ниже приведен прототип проекта который уже работает и оповещает меня о новых проектах. Реализован сканер RSS ленты одной из русской freelance биржи в категории Веб-программирование.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#0f0;font-weight:bold">&lt;?php</span>
+ini_set(<span style="color:#0ff;font-weight:bold">&#39;display_errors&#39;</span>,<span style="color:#ff0;font-weight:bold">1</span>);
+<span style="color:#fff;font-weight:bold">require_once</span> dirname(__FILE__).<span style="color:#0ff;font-weight:bold">&#39;/../_coolLib/loader-curl-phantomjs-proxy/include.php&#39;</span>;
+<span style="color:#fff;font-weight:bold">require_once</span> dirname(__FILE__).<span style="color:#0ff;font-weight:bold">&#39;/cfg.php&#39;</span>;
+$url = <span style="color:#0ff;font-weight:bold">&#39;https://www.fl.ru/rss/all.xml?subcategory=37&amp;category=5&#39;</span>;
+$gc = <span style="color:#fff;font-weight:bold">new</span> \GetContent\cSingleCurl();
+$content = $gc-&gt;<span style="color:#007f7f">load</span>($url);
+$feed = <span style="color:#fff;font-weight:bold">array</span>();
+<span style="color:#fff;font-weight:bold">if</span>(preg_match(<span style="color:#0ff;font-weight:bold">&#39;%\(Все проекты:\s(?&lt;category&gt;((?!\s-\s).)*)((?:\s-\s)(?&lt;subcategory&gt;[^&lt;]+))?\)&lt;/title&gt;%ims&#39;</span>, $content, $match)){
+	$feed[<span style="color:#0ff;font-weight:bold">&#39;category&#39;</span>] = $match[<span style="color:#0ff;font-weight:bold">&#39;category&#39;</span>];
+	<span style="color:#fff;font-weight:bold">if</span>(isset($match[<span style="color:#0ff;font-weight:bold">&#39;subcategory&#39;</span>])){
+		$feed[<span style="color:#0ff;font-weight:bold">&#39;subcategory&#39;</span>] = $match[<span style="color:#0ff;font-weight:bold">&#39;subcategory&#39;</span>];
+	}
+}
+<span style="color:#fff;font-weight:bold">if</span>(preg_match_all(<span style="color:#0ff;font-weight:bold">&#39;%&lt;item&gt;\s*&lt;title&gt;&lt;\!\[CDATA\[(?&lt;title&gt;.*)\]\]&gt;&lt;/title&gt;\s*&lt;link&gt;(?&lt;link&gt;.*)&lt;/link&gt;\s*&lt;description&gt;&lt;\!\[CDATA\[(?&lt;description&gt;.*)\]\]&gt;&lt;/description&gt;\s*&lt;guid&gt;(?&lt;guid&gt;.*)&lt;/guid&gt;\s*&lt;category&gt;(?&lt;category&gt;.*)&lt;/category&gt;\s*&lt;pubDate&gt;(?&lt;pubdate&gt;.*)&lt;/pubDate&gt;\s*&lt;/item&gt;%imsU&#39;</span>,$content,$matches)){
+	<span style="color:#fff;font-weight:bold">foreach</span>($matches[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>] <span style="color:#fff;font-weight:bold">as</span> $keyRow =&gt; $valRow){
+		$row[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>] = $matches[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>][$keyRow];
+		$row[<span style="color:#0ff;font-weight:bold">&#39;link&#39;</span>] = $matches[<span style="color:#0ff;font-weight:bold">&#39;link&#39;</span>][$keyRow];
+		$row[<span style="color:#0ff;font-weight:bold">&#39;id&#39;</span>] = preg_replace(<span style="color:#0ff;font-weight:bold">&#39;%^.*/(\d+)/.*$%ims&#39;</span>,<span style="color:#0ff;font-weight:bold">&#39;$1&#39;</span>,$row[<span style="color:#0ff;font-weight:bold">&#39;link&#39;</span>]);
+		$row[<span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>] = $matches[<span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>][$keyRow];
+		$row[<span style="color:#0ff;font-weight:bold">&#39;guid&#39;</span>] = $matches[<span style="color:#0ff;font-weight:bold">&#39;guid&#39;</span>][$keyRow];
+		$category = $matches[<span style="color:#0ff;font-weight:bold">&#39;category&#39;</span>][$keyRow];
+		$category = explode( <span style="color:#0ff;font-weight:bold">&#39;&lt;br/&gt;&#39;</span>, $category);
+		$row[<span style="color:#0ff;font-weight:bold">&#39;category&#39;</span>] = $category;
+		$row[<span style="color:#0ff;font-weight:bold">&#39;pubdate&#39;</span>] = strtotime($matches[<span style="color:#0ff;font-weight:bold">&#39;pubdate&#39;</span>][$keyRow]);
+		$feed[<span style="color:#0ff;font-weight:bold">&#39;row&#39;</span>][] = $row;
+	}
+}
+$reg = <span style="color:#0ff;font-weight:bold">&#39;%(парсер|собрать|парс|parser|pars|сбор|парсинг|скачать|загрузить|наполнить|слить)%imsu&#39;</span>;
+<span style="color:#fff;font-weight:bold">foreach</span>($feed[<span style="color:#0ff;font-weight:bold">&#39;row&#39;</span>] <span style="color:#fff;font-weight:bold">as</span> $project){
+	preg_match(<span style="color:#0ff;font-weight:bold">&#39;%https://www.fl.ru/projects/(?&lt;id&gt;\d+)/%&#39;</span>, $project[<span style="color:#0ff;font-weight:bold">&#39;link&#39;</span>], $match);
+	$project[<span style="color:#0ff;font-weight:bold">&#39;id&#39;</span>] = $match[<span style="color:#0ff;font-weight:bold">&#39;id&#39;</span>];
+	<span style="color:#fff;font-weight:bold">if</span>((preg_match($reg,$project[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>]) || preg_match($reg,$project[<span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>])) &amp;&amp; isUnique($project)){
+		$query = <span style="color:#0ff;font-weight:bold">&#34;INSERT INTO `flboost` (`id`, `title`, `description`, `date`, `category`, `url`)
+</span><span style="color:#0ff;font-weight:bold">			VALUES (</span><span style="color:#0ff;font-weight:bold">{</span>$project[&#39;id&#39;]<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">, &#39;&#34;</span>.$mysqli-&gt;<span style="color:#007f7f">escape_string</span>($project[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>]).<span style="color:#0ff;font-weight:bold">&#34;&#39;, &#39;&#34;</span>.$mysqli-&gt;<span style="color:#007f7f">escape_string</span>($project[<span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>]).<span style="color:#0ff;font-weight:bold">&#34;&#39;, &#39;&#34;</span>. $project[<span style="color:#0ff;font-weight:bold">&#39;pubdate&#39;</span>] .<span style="color:#0ff;font-weight:bold">&#34;&#39;, &#39;&#34;</span>.implode(<span style="color:#0ff;font-weight:bold">&#34;|&#34;</span>,$project[<span style="color:#0ff;font-weight:bold">&#39;category&#39;</span>]).<span style="color:#0ff;font-weight:bold">&#34;&#39;, &#39;</span><span style="color:#0ff;font-weight:bold">{</span>$project[&#39;link&#39;]<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#39;)&#34;</span>;
+		$mysqli-&gt;<span style="color:#007f7f">query</span>($query);
+		<span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#39;SEND!&#39;</span>;
+		mail(<span style="color:#0ff;font-weight:bold">&#39;zking.nothingz@gmail.com&#39;</span>,<span style="color:#0ff;font-weight:bold">&#39;ALERT &#39;</span> . $project[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>], $project[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>] . <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> . date(<span style="color:#0ff;font-weight:bold">&#39;c&#39;</span>,$project[<span style="color:#0ff;font-weight:bold">&#39;pubdate&#39;</span>]) . <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> . $project[<span style="color:#0ff;font-weight:bold">&#39;link&#39;</span>] . <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> . $project[<span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>]);
+	} <span style="color:#fff;font-weight:bold">else</span> {
+		<span style="color:#007f7f">//echo &#39;NOT!&#39;;
+</span><span style="color:#007f7f"></span>	}
+}
+<span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#39;done!&#39;</span>;
+<span style="color:#fff;font-weight:bold">function</span> isUnique($data){
+	<span style="color:#fff;font-weight:bold">global</span> $mysqli;
+	$query = <span style="color:#0ff;font-weight:bold">&#34;SELECT url FROM `flboost` WHERE `id` = </span><span style="color:#0ff;font-weight:bold">{</span>$data[&#39;id&#39;]<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>;
+	$result = $mysqli-&gt;<span style="color:#007f7f">query</span>($query);
+	<span style="color:#fff;font-weight:bold">return</span> !$result-&gt;<span style="color:#007f7f">num_rows</span>;
+}
+</code></pre></div>
+<p>Свежую версию скрипта можно скачать на <a href="https://github.com/bpteam/flboost/">github</a>, там-же можно помочь прокачать идею до полноценного сервиса. Для большей оперативности можно настроить SMS оповещение на телефон. Для пользователей Gmail поможет статья на <a href="http://habrahabr.ru/post/145447/">Habrahabr</a>.</p>
+
+<p><strong>UPD</strong>: 27 июня 2016 Google прикрыл рассылку SMS из календаря.</p>
+
+      </div>
+
+      <footer>
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>Your ad could be here.</p>
+    
+     © 2015    ·  Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>. 
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+</html>
