@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Evgen Pyanykh">
+    <meta name="description" content="Evgen Pyanykh&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="http://localhost:1313">
+    <title>
+  PHP КЛАСС ДЛЯ РАСПОЗНАВАНИЯ ТЕКСТА НА ИЗОБРАЖЕНИИ · Evgen Pyanykh
+</title>
+
+    <link rel="canonical" href="http://localhost:1313/post/php-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D1%81%D0%BF%D0%BE%D0%B7%D0%BD%D0%B0%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B0-%D0%BD%D0%B0-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B8/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="http://localhost:1313/css/coder.min.578f8fce262e4c448c239b69661084c57507b89d51b8d04de15cd1d8f8135600.css" integrity="sha256-V4&#43;PziYuTESMI5tpZhCExXUHuJ1RuNBN4VzR2PgTVgA=" media="screen">
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://localhost:1313/img/little_w.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://localhost:1313/img/little_w.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.49" />
+  </head>
+
+  <body class="">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://localhost:1313">
+      Evgen Pyanykh
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/contact/">Contact me</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>PHP КЛАСС ДЛЯ РАСПОЗНАВАНИЯ ТЕКСТА НА ИЗОБРАЖЕНИИ</h1>
+    </header>
+
+    <p><img src="http://localhost:1313/img/ocr.png" alt="ocr" /></p>
+
+<p>Для одного из проектов было необходимо распознать текст на изображении. Были варианты использования Tesseract, но была вероятность использования простого хостинга где не будет возможности установить дополнительный софт. Проанализировав доступные средства на GitHub нашел несколько реализаций, но они были на мой взгляд, то слишком сложные, то не простые для быстрой интеграции. В общем свой велосипед ближе и милей.</p>
+
+<p>Класс поддерживает только текст написанный на монотонном фоне, без перемешивания строк.
+Такие изображения он не обработает:</p>
+
+<p><img src="http://localhost:1313/img/ocr/first.png" alt="first" /></p>
+
+<p><img src="http://localhost:1313/img/ocr/second.png" alt="second" /></p>
+
+<p>В первом случае из-за разноцветного фона, во втором из-за того что строчки пересекаются. Скрипт разрабатывался для распознавания номеров телефонов на изображении. С чем он и справляется. Для обработки текста изначально он разрезается на строки, слова и символы в словах. Для отделения объектов текста от фона текст выделяется на разнице отличия яркости текста и яркости фона. Как правило фон является доминирующим цветом на изображении, для выявления его соберем все цвета и примем цвет который чаще всего встречается за фон изображения. В изображениях формата JPG частенько встречаются размытия, шумы, для устранения их мы возьмем и удалим все смежные цвета с фоном которые входят в диапазон от цвет фона до цвет фона — 20%. Оставшиеся цвета присвоим тексту. После того как мы определились какого цвета текст, а какого фон мы разделяем изображение на строки. Строки с текстом будут темнее чем меж строчные интервалы, после того как мы вычислим строки, нам нужно нарастить по 20% для захвата букв которые выходят  за рамки темной полосы текста. Такие буквы как заглавные и у, р, б и т.д. Так же, для того чтоб подчеркнуть яркость текста мы утолщаем его обходя все изображение и расширяя текст.</p>
+
+<p><img src="http://localhost:1313/img/ocr/Выделение_001.png" alt="img" /></p>
+
+<p>Подобный метод разделения на объекты можно применить к словам и буквам, для этого нужно перевернуть изображение на 270 градусов и учесть что между словами интервал больше чем между буквами.</p>
+
+<p><img src="http://localhost:1313/img/ocr/Выделение_0021.png" alt="img" />
+<img src="http://localhost:1313/img/ocr/Выделение_003.png" alt="img" /></p>
+
+<p>Разбив текст на буквы приступаем к распознаванию. Для этого нам нужно создать шаблоны для символов. В генераторе шаблонов применяется тот-же алгоритм разделения, но с дополнительным сведением одинаковых символов. Для создания более точных шаблонов необходимо задать погрешность в символах, обычно это до 10%, в этом случае мы выиграем в списке одинаковых символов при создании шаблона. Погрешность задается вызовом метода Recognizer::setInfelicity(10). Чем больше будет образцов для анализа тем лучше. Сам генератор располагается по адресу ./template_generator/generator.php</p>
+
+<p>После запуска у вас должна появиться форма с изображениями и текстовым полем для ввода расшифровки этого изображения:</p>
+
+<p><img src="http://localhost:1313/img/ocr/Выделение_004.png" alt="img" /></p>
+
+<p>Заполнив форму и нажав кнопку Gen вам в браузере выведется шаблон в JSON формате, его нужно сохранить в нужном для вас месте под понятным именем, для подключения его вам нужно задать папку в котором хранится шаблон и его имя с помощью функции Recognizer::setTemplateDir(dirName) Recognizer::loadTemplate(name).</p>
+
+<p>Каждый символ приводится в формат 15×16 и выглядит в форматированном виде:</p>
+
+<p><img src="http://localhost:1313/img/ocr/15732349211433010544.6444.png" alt="0" /></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">000000000000000
+000001111000000
+000011111100000
+000110000111000
+001100000011000
+011100000011100
+011100000011100
+011100000011100
+011100000011100
+011100000011100
+011100000011100
+011100000011100
+001100000011000
+000110000111000
+000111000110000
+000011111100000</code></pre></div>
+<p><img src="http://localhost:1313/img/ocr/12589651291433010544.6516.png" alt="5" /></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">000000000000000
+001111111110000
+011111111110000
+011000000000000
+011000000000000
+011000000000000
+011000000000000
+011111110000000
+011111111000000
+000000001110000
+000000000110000
+000000000110000
+000000000110000
+011000001110000
+011111111100000
+001111111000000</code></pre></div>
+<p>При сравнении берется значение из шаблона и сравнивается с распознаваемым символом, у того символа который лучше всего совпадет и присваивается значение шаблона, если не удалось распознать, то подставится вопросительный знак.</p>
+
+<p>Код  применения класса:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#0f0;font-weight:bold">&lt;?php</span>
+<span style="color:#fff;font-weight:bold">require_once</span> __DIR__ . <span style="color:#0ff;font-weight:bold">&#39;/bootstrap.php&#39;</span>;
+<span style="color:#fff;font-weight:bold">use</span> bpteam\phpOCR\Recognizer;
+<span style="color:#fff;font-weight:bold">use</span> bpteam\phpOCR\Img;
+$file_name = __DIR__ . <span style="color:#0ff;font-weight:bold">&#39;/template/test_img/olx1.png&#39;</span>;
+$ex = <span style="color:#0ff;font-weight:bold">&#39;png&#39;</span>;
+Recognizer::<span style="color:#007f7f">setInfelicity</span>(<span style="color:#ff0;font-weight:bold">10</span>);
+$img = Recognizer::<span style="color:#007f7f">openImg</span>($file_name);
+<span style="color:#007f7f">//Source image
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;&lt;br&gt;Step 0 src img&lt;br&gt;&#34;</span>;
+Img::<span style="color:#007f7f">show</span>($img,$ex,<span style="color:#ff0;font-weight:bold">100</span>);
+<span style="color:#007f7f">//load template
+</span><span style="color:#007f7f"></span>$name = <span style="color:#0ff;font-weight:bold">&#39;olx&#39;</span>;
+Recognizer::<span style="color:#007f7f">setTemplateDir</span>(__DIR__ . <span style="color:#0ff;font-weight:bold">&#39;/template/&#39;</span>);
+$template = Recognizer::<span style="color:#007f7f">loadTemplate</span>($name);
+<span style="color:#007f7f">// OCR
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;&lt;br&gt;defineImg&lt;br&gt;&#34;</span>;
+$text = Recognizer::<span style="color:#007f7f">read</span>($file_name, $template);
+<span style="color:#fff;font-weight:bold">echo</span> $text.<span style="color:#0ff;font-weight:bold">&#34;&lt;br&gt;&#34;</span>;
+</code></pre></div>
+<p>Код класса можно форкнуть в моем профиле на <a href="https://github.com/bpteam">GitHub</a> <a href="https://github.com/bpteam/gd2-php-ocr">gd2-php-ocr</a>.</p>
+
+  </article>
+</section>
+
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>Your ad could be here.</p>
+    
+     © 2015    ·  Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>. 
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+</html>
