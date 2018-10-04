@@ -1,6 +1,8 @@
 ---
 title: "Автоматическое скачивание torrent из dropbox в ubuntu server"
 date: "2015-05-24"
+aliases: ["/blog/2015/05/24/автоматическое-скачивание-torrent-из-dropbox-в-ubuntu-server/"]
+categories: [АВТОМАТИЗАЦИЯ]
 tags: [DROPBOX, LINUX, PIRATES, SERVER, UBUNTU, UTORRENT]
 ---
 

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Evgen Pyanykh">
+    <meta name="description" content="Evgen Pyanykh&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="http://localhost:1313">
+    <title>
+  Автоматическая проверка кода после commit или merge request · Evgen Pyanykh
+</title>
+
+    <link rel="canonical" href="http://localhost:1313/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="http://localhost:1313/css/coder.min.578f8fce262e4c448c239b69661084c57507b89d51b8d04de15cd1d8f8135600.css" integrity="sha256-V4&#43;PziYuTESMI5tpZhCExXUHuJ1RuNBN4VzR2PgTVgA=" media="screen">
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://localhost:1313/img/little_w.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://localhost:1313/img/little_w.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.49" />
+  </head>
+
+  <body class="">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://localhost:1313">
+      Evgen Pyanykh
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/skills/">Skills</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/contact/">Contact me</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://localhost:1313/license/">License</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <h1 class="title">Автоматическая проверка кода после commit или merge request</h1>
+        <h2 class="date">2016-10-15</h2>
+      </header>
+
+      <div>
+        <p><img src="http://localhost:1313/img/ci-cd/creazione-di-adamo.jpg" alt="" /></p>
+
+<p>Я давно пользуюсь соц. сетью для программистов github.
+Для него существует множество сервисов которые дополняют статическую информацию о проекте динамической статистикой.
+Которая автоматически собирается и выводит полезную информацию для разработчика и для людей которые планируют
+использовать код из этого репозитория.</p>
+
+<p>Для локальных pet проектов которые не хочется публиковать в os тоже было бы не плохо иметь подобный спектор услуг.
+Предупреждаю сразу, все ниже изложенное будет иметь отношение к проектам
+написанным на ЯП PHP и сопутствующим технологиям, но возможно применимо и к другим конфигурациям.</p>
+
+<p>Комплекс должен будет собирать инфорацию о проектке и на главной странице проекта выводить необходимую информацию.
+Генерировать обновление статистики для комита и для каждого MR/PR(merge/pull request). Для MR статистика выводится в разделе
+комментарии.
+Перечень сторонних обработчиков:</p>
+
+<ul>
+<li>Прогон тестов после каждого камита в активную ветку или при PR(pull request). Популярный и бесплатный для Open Source это <a href="https://travis-ci.org/">Travis CI</a>, позволяет запускать код в разном окружении, собирать отчеты для других инструментов. (локальный аналог <a href="https://jenkins.io/">Jenkins</a>, gitlab ci);</li>
+<li>Статический анализ кода по покрытию тестами кода. Я использовал CodeClimate, он понимает отчеты от PHPUnit иведет статистику по развитию проекта, но недавно узнал о <a href="http://www.sonarqube.org/">SonarQube</a> и решил остановиться на нем;</li>
+<li>Сложность кода, которая тоже собирается при помощи статических анализаторов. С генерацией GUI для оценки текущего остояния можно использовать <a href="http://www.phpmetrics.org/">PhpMetrics</a>. Для истории буду использовать тот же SonarQube;</li>
+<li>Copy/Paste анализ кода на дублирование кода с отображением подозрительных мест. Для хранения истории будет использоваться тот-же SonarQube или для текущего состояния можно использовать <a href="https://github.com/sebastianbergmann/phpcpd">phpcpd</a>)</li>
+</ul>
+
+<p>Управление репозиториями будем осуществлять средствами <a href="https://about.gitlab.com/">GitLab CE</a>.</p>
+
+<p>Композиция поднятия всего этого добра будет состоять из:</p>
+
+<ul>
+<li><a href="http://localhost:1313/posts/2016-10-15-пусть-всегда-будет-SSL-подключение-lets-encrypt-к-вашему-домену">Поднятие nGinx в Docker контейнерах и шифрование трафика при помощи Let’s encrypt сертификатов</a>;</li>
+<li><a href="http://localhost:1313/posts/2016-11-27-поднятие-и-настройка-gitlab-за-nginx-в-docker-контейнерах">Поднятие и настройка GitLab за nGinx в Docker</a>;</li>
+<li>Настройка Jenkins для запуска заданий;</li>
+<li>Настройка GitLab CI для запуска заданий;</li>
+<li>Парсинг и агрегирование данных из статического анализатора кода на сложность;</li>
+<li>Вывод информации из базы данных статического анализатора кода на сложность в красивом формате с временным прогрессом состояния проекта;</li>
+<li>Парсинг и агрегирование Данных из статического анализатора кода на Copy/Paste;</li>
+<li>Вывод истории из базы данных статического анализатора кода на Copy/Paste в красивом формате с временным прогрессом состояния проекта;</li>
+<li>Агрегирование и парсинг результатов запуска авто тестов и сохранение результатов в БД;</li>
+<li>Вывод статуса проекта относительно прогона теста и определенного комита;</li>
+<li>Агрегирование и парсинг данных покрытия кода тестами с последующим сохранением в БД;</li>
+<li>Вывод хронологической истории о покрытии тестами кода в зависимости от коммита.</li>
+<li>Генерация виджетов для данных из анализаторово по номеру комита</li>
+</ul>
+
+<p>По мере развития комплекса ссылки на проделанные работы и иструкции будет размещаться в выше стоящем списке.</p>
+
+      </div>
+
+      <footer>
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>Your ad could be here.</p>
+    
+     © 2017    ·  Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>. 
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-79837070-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

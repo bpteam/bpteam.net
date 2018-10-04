@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gitlab on Evgen Pyanykh</title>
+    <link>http://localhost:1313/tags/gitlab/</link>
+    <description>Recent content in Gitlab on Evgen Pyanykh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <lastBuildDate>Sun, 27 Nov 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Поднятие и настройка Gitlab за Nginx в Docker контейнерах</title>
+      <link>http://localhost:1313/posts/2016-11-27-%D0%BF%D0%BE%D0%B4%D0%BD%D1%8F%D1%82%D0%B8%D0%B5-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-gitlab-%D0%B7%D0%B0-nginx-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0%D1%85/</link>
+      <pubDate>Sun, 27 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2016-11-27-%D0%BF%D0%BE%D0%B4%D0%BD%D1%8F%D1%82%D0%B8%D0%B5-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-gitlab-%D0%B7%D0%B0-nginx-%D0%B2-docker-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0%D1%85/</guid>
+      <description>Удобных, открытых и приватных облачных хранилищ на текущий момент существует множество. Одни из популярных это Github и Bitbacket. Github предоставляет большое сообщество OS разработчиков, Bitbacket бесплатные приватные репозитории, но бывают прецеденты когда эти сервисы не доступны по техническим причинам или заблокированы на уровне вашего интернет провайдера. Именно после таких прецедентов начинаешь задумываться о поднятии локального хранилища с GUI.
+И тогда нам на помощь приходит gitlab ce. Это удобный инструмент для просмотра в браузере кода, информирования об изменениях на почту, дискуссиях о коде в PullMergeRequest и много, много, много чего еще в этом инструменте есть.</description>
+    </item>
+    
+    <item>
+      <title>Автоматическая проверка кода после commit или merge request</title>
+      <link>http://localhost:1313/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/</link>
+      <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/</guid>
+      <description>Я давно пользуюсь соц. сетью для программистов github. Для него существует множество сервисов которые дополняют статическую информацию о проекте динамической статистикой. Которая автоматически собирается и выводит полезную информацию для разработчика и для людей которые планируют использовать код из этого репозитория.
+Для локальных pet проектов которые не хочется публиковать в os тоже было бы не плохо иметь подобный спектор услуг. Предупреждаю сразу, все ниже изложенное будет иметь отношение к проектам написанным на ЯП PHP и сопутствующим технологиям, но возможно применимо и к другим конфигурациям.</description>
+    </item>
+    
+    <item>
+      <title>GIT push во все зеркала репозитория</title>
+      <link>http://localhost:1313/posts/2016-03-21-git-push-%D0%B2%D0%BE-%D0%B2%D1%81%D0%B5-%D0%B7%D0%B5%D1%80%D0%BA%D0%B0%D0%BB%D0%B0-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F/</link>
+      <pubDate>Mon, 21 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2016-03-21-git-push-%D0%B2%D0%BE-%D0%B2%D1%81%D0%B5-%D0%B7%D0%B5%D1%80%D0%BA%D0%B0%D0%BB%D0%B0-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F/</guid>
+      <description>Паранойя никогда не бывает избыточной, особенно для меня. Когда я пишу код и вдруг теряю его по разным причинам, не сохранился, заснул на бекспейсе, диск с git репозиторием посыпался, я всегда расстраиваюсь и не хочу писать снова, то что уже было написано. Ниже будет описано как предохраниться от одной из этих проблем, а именно с потерей данных по средствам гибели HDD. Мы реализуем кросс пуш во все возможные хранилища для того чтоб уберечь наши труды от забвения.</description>
+    </item>
+    
+  </channel>
+</rss>

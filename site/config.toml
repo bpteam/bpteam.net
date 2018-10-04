@@ -6,12 +6,14 @@ theme = "coder"
 
 languagecode = "ru"
 
-paginate = 20
+paginate = 10
 canonifyurls = true
 
 pygmentsstyle = "b2"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
+
+googleAnalytics = "UA-79837070-1"
 
 [params]
     author = "Evgen Pyanykh"
@@ -39,7 +41,7 @@ pygmentscodefencesguesssyntax = true
     name = "Github"
     icon = "fab fa-github fa-2"
     weight = 1
-    url = "https://github.com/johndoe/"
+    url = "https://github.com/bpteam/"
 [[params.social]]
     name = "e-mail"
     icon = "fa fa-envelope fa-2"
@@ -52,15 +54,23 @@ pygmentscodefencesguesssyntax = true
     name = "Blog"
     weight = 1
     url  = "/posts/"
+#[[menu.main]]
+#    name = "About"
+#    weight = 2
+#    url = "/about/"
 [[menu.main]]
-    name = "About"
-    weight = 2
-    url = "/about/"
-[[menu.main]]
-    name = "Projects"
+    name = "Skills"
     weight = 3
-    url = "/projects/"
+    url = "/skills/"
+#[[menu.main]]
+#    name = "Projects"
+#    weight = 4
+#    url = "/projects/"
 [[menu.main]]
     name = "Contact me"
     weight = 5
     url = "/contact/"
+[[menu.main]]
+    name = "License"
+    weight = 6
+    url = "/license/"

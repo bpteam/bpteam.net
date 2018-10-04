@@ -4,20 +4,21 @@ title: "Contacts"
 
 [![cv](/img/contact/100/cv.png)__CV__](http://goo.gl/1dHbjF)
 
-[![email](/img/contact/100/email_mail_post_letter_stamp.png) e-mail](mailto:bpteam22@gmail.com)
+[![email](/img/contact/100/email_mail_post_letter_stamp.png) bpteam22@gmail.com](mailto:bpteam22@gmail.com)
 
-[![blog](/img/contact/100/blog.png) Blog](/post/)
+[![blog](/img/contact/100/blog.png) Blog](/posts/)
 
-![freelance](/img/contact/100/freelance.png)
+[![freelance](/img/contact/100/freelance.png) fl.ru](https://fl.ru/users/bpteam/)
 
-![email](/img/contact/100/github.png)
+[![github](/img/contact/100/github.png) GitHub](https://github.com/bpteam)
 
-![email](/img/contact/100/linkedin.png)
+[![linkedin](/img/contact/100/linkedin.png) LinkedIn](https://www.linkedin.com/in/evgeniy-pynykh-14566559/)
 
-![email](/img/contact/100/livecoding.png)
+[![livecoding](/img/contact/100/livecoding.png) LiveCoding](https://www.livecoding.tv/bpteam/)
 
-![email](/img/contact/100/phone-icon.png)
+[![phone](/img/contact/100/phone-icon.png) +380668637437](skype:+380668637437?call)
 
-![email](/img/contact/100/Skype.png)
+[![email](/img/contact/100/Telegram.png) @bpteam22](https://telegram.me/bpteam22)
 
-![email](/img/contact/100/Telegram.png)
+[![skype](/img/contact/100/Skype.png) bpteam22](skype:bpteam22?call)
+
