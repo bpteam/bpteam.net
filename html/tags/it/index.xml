@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>It on Evgen Pyanykh</title>
-    <link>http://localhost:1313/tags/it/</link>
+    <link>http://bpteam.net/tags/it/</link>
     <description>Recent content in It on Evgen Pyanykh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
     <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/it/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bpteam.net/tags/it/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Войти в IT</title>
-      <link>http://localhost:1313/posts/2017-02-01-%D0%B2%D0%BE%D0%B9%D1%82%D0%B8-%D0%B2-it/</link>
+      <link>http://bpteam.net/posts/2017-02-01-%D0%B2%D0%BE%D0%B9%D1%82%D0%B8-%D0%B2-it/</link>
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-02-01-%D0%B2%D0%BE%D0%B9%D1%82%D0%B8-%D0%B2-it/</guid>
+      <guid>http://bpteam.net/posts/2017-02-01-%D0%B2%D0%BE%D0%B9%D1%82%D0%B8-%D0%B2-it/</guid>
       <description>В прошлом году я решил прокачать свои навыки по web frontend разработке. Верстка у меня на уровне ниже плинтуса по этому к ней подключаться не хочется, а иногда так хочется сделать красивую страничку для своего pet проекта. Андрей посоветовал пройти курс на freecodecamp.com. По началу было просто ибо там был только html и bootstrap стили. В день удавалось пройти по несколько десятков заданий за один присест. Но потом пришло время верстки и JS кодинга.</description>
     </item>
     

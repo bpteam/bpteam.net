@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Merge Request on Evgen Pyanykh</title>
-    <link>http://localhost:1313/tags/merge-request/</link>
+    <link>http://bpteam.net/tags/merge-request/</link>
     <description>Recent content in Merge Request on Evgen Pyanykh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
     <lastBuildDate>Sat, 15 Oct 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/merge-request/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bpteam.net/tags/merge-request/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Автоматическая проверка кода после commit или merge request</title>
-      <link>http://localhost:1313/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/</link>
+      <link>http://bpteam.net/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/</link>
       <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/</guid>
+      <guid>http://bpteam.net/posts/2016-10-15-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BA%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5-commit-%D0%B8%D0%BB%D0%B8-merge-request/</guid>
       <description>Я давно пользуюсь соц. сетью для программистов github. Для него существует множество сервисов которые дополняют статическую информацию о проекте динамической статистикой. Которая автоматически собирается и выводит полезную информацию для разработчика и для людей которые планируют использовать код из этого репозитория.
 Для локальных pet проектов которые не хочется публиковать в os тоже было бы не плохо иметь подобный спектор услуг. Предупреждаю сразу, все ниже изложенное будет иметь отношение к проектам написанным на ЯП PHP и сопутствующим технологиям, но возможно применимо и к другим конфигурациям.</description>
     </item>
