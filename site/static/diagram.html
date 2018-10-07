@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo chart with scils</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+<body>
+<div id="container" style="min-width: 400px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+<script type="text/javascript">
+    let values = [
+            ['PHP', 99, 99],
+            ['Python', 80, 90],
+            ['JavaScript', 80, 80],
+            ['CSS/HTML', 40, 10],
+            ['Lua', 30, 40],
+            ['PostgreSQL', 80, 99],
+            ['MySQL', 50, 50],
+            ['Mongodb', 80, 99],
+            ['GraphDB', 50, 90],
+            ['Redis', 90, 90],
+            ['Memcached', 90, 90],
+            ['Nginx', 90, 90],
+            ['Docker', 80, 90],
+            ['Consul', 70, 60],
+            ['Supervisor', 80, 60],
+            ['RabbitMQ', 80, 90],
+            ['Git', 70, 80],
+            ['Yii', 80, 40],
+            ['Symfony', 90, 99],
+            ['Flask', 70, 70],
+            ['jQuery', 60, 30],
+            ['REST API', 80, 80],
+            ['GraphQL', 80, 80],
+            ['DevOps', 60, 80],
+            ['High Load', 70, 90],
+            ['Machine Learning', 10, 80],
+            ['Analytics', 30, 70],
+            ['English', 20, 99],
+            ['Soft Skills', 40, 80],
+        ],
+        category = 0,
+        skill = 1,
+        interest = 2;
+
+    Highcharts.chart('container', {
+
+        chart: {
+            polar: true,
+            type: 'line',
+            backgroundColor: '#fafafa'
+        },
+
+        title: {
+            text: false,
+        },
+
+        pane: {
+            size: '90%'
+        },
+
+        xAxis: {
+            categories: values.map((v) => {
+                return v[category];
+            }),
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+            max: 100
+        },
+
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}%</b><br/>'
+        },
+
+        legend: {
+            layout: 'horizontal'
+        },
+
+        series: [{
+            color: 'yellow',
+            name: 'Interest',
+            data: values.map((v) => {
+                return v[interest];
+            }),
+            pointPlacement: 'on'
+        }, {
+            color: 'green',
+            name: 'Skills',
+            data: values.map((v) => {
+                return v[skill];
+            }),
+            pointPlacement: 'on'
+        }]
+
+    });
+</script>
+</body>
+</html>
