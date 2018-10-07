@@ -1,5 +1,5 @@
-baseurl = "http://bpteam.net"
-#baseurl = "http://localhost:1313"
+#baseurl = "http://bpteam.net"
+baseurl = "http://localhost:1313"
 title = "Evgen Pyanykh"
 
 theme = "coder"
