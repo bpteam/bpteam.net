@@ -18,4 +18,7 @@ tags: [DEVELOPMENT, DOCKER, DOCKER REGISTRY, DEVOPS, IT, WHALES CAN FLY]
 ## Docker GUI
 
 Для того чтоб можно было легко оперировать данными из Docker Registry мы развернем графическую оболочку.
-Я выбрал для себя 
+Я выбрал для себя [Portainer](https://portainer.io/) - выглядит вменяемо и обладает большим набором для 
+работы с api docker, registry, swarm.
+
+![portainer](/img/docker-registry/portainer-docker-containers.jpg)
