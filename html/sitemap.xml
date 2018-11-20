@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://bpteam.net/posts/2018-11-17-%D0%BF%D0%BE%D1%81%D1%82-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-%D0%BE%D1%82%D0%BD%D0%BE%D1%81%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%B4%D0%B0%D1%82%D1%8B-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC-%D0%BA-timestamp/</loc>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bpteam.net/posts/2017-02-01-%D0%B2%D0%BE%D0%B9%D1%82%D0%B8-%D0%B2-it/</loc>
     <lastmod>2017-02-01T00:00:00+00:00</lastmod>
   </url>
@@ -122,6 +127,18 @@
   </url>
   
   <url>
+    <loc>http://bpteam.net/tags/data-mining/</loc>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bpteam.net/tags/date/</loc>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://bpteam.net/tags/development/</loc>
     <lastmod>2017-02-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -147,7 +164,7 @@
   
   <url>
     <loc>http://bpteam.net/</loc>
-    <lastmod>2017-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -194,14 +211,14 @@
   </url>
   
   <url>
-    <loc>http://bpteam.net/tags/it/</loc>
-    <lastmod>2017-02-01T00:00:00+00:00</lastmod>
+    <loc>http://bpteam.net/categories/it/</loc>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://bpteam.net/categories/it/</loc>
-    <lastmod>2017-02-01T00:00:00+00:00</lastmod>
+    <loc>http://bpteam.net/tags/it/</loc>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -271,7 +288,7 @@
   
   <url>
     <loc>http://bpteam.net/tags/php/</loc>
-    <lastmod>2016-03-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -301,7 +318,7 @@
   
   <url>
     <loc>http://bpteam.net/posts/</loc>
-    <lastmod>2017-02-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -412,6 +429,12 @@
   </url>
   
   <url>
+    <loc>http://bpteam.net/tags/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7/</loc>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://bpteam.net/categories/%D0%B1%D0%B5%D0%B7-%D1%80%D1%83%D0%B1%D1%80%D0%B8%D0%BA%D0%B8/</loc>
     <lastmod>2016-01-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -419,7 +442,7 @@
   
   <url>
     <loc>http://bpteam.net/tags/%D0%B2%D0%B5%D0%BB%D0%BE%D1%81%D0%B8%D0%BF%D0%B5%D0%B4/</loc>
-    <lastmod>2015-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

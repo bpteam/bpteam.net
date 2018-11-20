@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Evgen Pyanykh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://bpteam.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Пост анализ относительной даты создания документа с приведением к timestamp</title>
+      <link>http://bpteam.net/posts/2018-11-17-%D0%BF%D0%BE%D1%81%D1%82-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-%D0%BE%D1%82%D0%BD%D0%BE%D1%81%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%B4%D0%B0%D1%82%D1%8B-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC-%D0%BA-timestamp/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://bpteam.net/posts/2018-11-17-%D0%BF%D0%BE%D1%81%D1%82-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-%D0%BE%D1%82%D0%BD%D0%BE%D1%81%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%B4%D0%B0%D1%82%D1%8B-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC-%D0%BA-timestamp/</guid>
+      <description>При сборе документов для анализа из открытых источников с дополнительной пост обработкой иногда нужно получить дату создания документа, но бывает так, что временная метка записана в человеко понятном формате в относительном виде и на не английском языке, в не структурированном виде. А документ мы пнинимает на обработку не во время получения скачивания.
+Примеры входящих данных:
+ в понедельник, 14:33 две минуты назад вчера, 18:23 сегодня, 19:47 2018-11-17 18:22  Предварительный план Так как время призодит в разных языках и разных форматах, нам нужно привести несколько операций для понимания, того, что перед нами и в итоге получить Unix Timestamp.</description>
+    </item>
     
     <item>
       <title>Войти в IT</title>
