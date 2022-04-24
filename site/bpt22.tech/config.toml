@@ -1,5 +1,4 @@
-# baseurl = "//bpt22.tech"
-baseurl = "http://localhost:1313"
+baseurl = "//bpt22.tech"
 title = "Evgen Pyanykh"
 
 theme = "coder"
@@ -9,7 +8,7 @@ languagecode = "ru"
 paginate = 10
 canonifyurls = true
 
-pygmentsstyle = "b2"
+pygmentsstyle = "w2"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
@@ -37,12 +36,12 @@ pygmentscodefencesguesssyntax = true
 # Social links
 [[params.social]]
     name = "Github"
-    icon = "fab fa-github fa-2"
+    icon = "fa fa-5x fa-brands fa-github fa-2"
     weight = 1
     url = "https://github.com/bpteam/"
 [[params.social]]
     name = "e-mail"
-    icon = "fa fa-envelope fa-2"
+    icon = "fa fa-5x fa-envelope fa-2"
     weight = 2
     url = "mailto:bpteam22@gmail.com"
 

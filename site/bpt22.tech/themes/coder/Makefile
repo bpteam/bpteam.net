@@ -1,17 +1,12 @@
-.PHONY: release demo clean
+HUGO_BIN=hugo
+
+.PHONY: build demo release
+
+build:
+	$(HUGO_BIN) --themesDir=../.. --source=exampleSite
 
 demo:
-	mkdir -p demo/themes/hugo-coder
-	rsync -av exampleSite/ demo
-	rsync -av --exclude='demo' --exclude='exampleSite' --exclude='.git' . demo/themes/hugo-coder
-	cd demo && ./hugow serve -D
+	$(HUGO_BIN) server -D --themesDir=../.. --source=exampleSite
 
-release:
-	mkdir -p demo/themes/hugo-coder
-	rsync -av exampleSite/ demo
-	rsync -av --exclude='demo' --exclude='exampleSite' --exclude='.git' . demo/themes/hugo-coder
-	cd ./demo && ./hugow
-	rm -rf ./resources && cp -r ./demo/resources ./resources
-
-clean:
-	rm -rf demo
+release: build
+	rm -rf ./resources && cp -r ./exampleSite/resources ./resources

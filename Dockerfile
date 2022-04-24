@@ -39,8 +39,8 @@ RUN apk update && \
 EXPOSE 1313
 
 # Create working directory
-RUN mkdir -p /usr/share/blog
+RUN mkdir -p /usr/share/site
 RUN mkdir -p /usr/share/html
-WORKDIR /usr/share/blog
+WORKDIR /usr/share/site
 
 CMD ["echo", "Hello, use docker-compose run --rm blog sh"]

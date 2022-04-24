@@ -2,3 +2,4 @@
 *.iml
 .idea/
 public/
+.hugo_build.lock

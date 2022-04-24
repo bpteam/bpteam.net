@@ -1,262 +1,150 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="author" content="Evgen Pyanykh">
-    <meta name="description" content="Evgen Pyanykh&#39;s personal website">
-    <meta name="keywords" content="blog,developer,personal">
-
-    <base href="http://bpteam.net">
-    <title>
-  Развертывание среды разработки с помощью docker · Evgen Pyanykh
-</title>
-
-    <link rel="canonical" href="http://bpteam.net/posts/2015-11-08-%D1%80%D0%B0%D0%B7%D0%B2%D0%B5%D1%80%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D1%8B-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-docker/">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
-
-    
-      
-      
-      <link rel="stylesheet" href="http://bpteam.net/css/coder.min.578f8fce262e4c448c239b69661084c57507b89d51b8d04de15cd1d8f8135600.css" integrity="sha256-V4&#43;PziYuTESMI5tpZhCExXUHuJ1RuNBN4VzR2PgTVgA=" media="screen">
-    
-
-    
-
-    
-
-    <link rel="icon" type="image/png" href="http://bpteam.net/img/little_w.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="http://bpteam.net/img/little_w.png" sizes="16x16">
-
-    
-
-    <meta name="generator" content="Hugo 0.49" />
-  </head>
-
-  <body class="">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="http://bpteam.net">
-      Evgen Pyanykh
-    </a>
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="http://bpteam.net/posts/">Blog</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="http://bpteam.net/skills/">Skills</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="http://bpteam.net/contact/">Contact me</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="http://bpteam.net/license/">License</a>
-          </li>
-        
-      
-      
-    </ul>
-  </section>
-</nav>
-
-
-      <div class="content">
-        
-  <section class="container post">
-    <article>
-      <header>
-        <h1 class="title">Развертывание среды разработки с помощью docker</h1>
-        <h2 class="date">2015-11-08</h2>
-      </header>
-
-      <div>
-        <p><img src="http://bpteam.net/img/dev-docker/834870999.jpg" alt="" /></p>
-
-<p>В работе мы используем много различных инструментов в каждом проекте и иногда они отличаются версиями и для запуска этих инструментов на локальной дев машине мы используем контейнеры для запуска в изолированной среде, где они не будут конфликтовать. Простой и удобный инструмент для подобных действий является <a href="http://docker.com/">Docker</a>.</p>
-
-<p><strong>Dockerfile</strong></p>
-
-<p>Чтоб в последствии легко разворачивать подобные контейнеры нужно создать <a href="https://docs.docker.com/reference/builder/">Dockerfile</a> для создания снимка системы которым мы будем пользоваться в будущем. Пример создание php окружение с нужными расширениями уже внутри этого контейнера:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#007f7f">#Dir for extensions config /usr/local/etc/php/conf.d/</span><span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">FROM</span><span style="color:#0ff;font-weight:bold"> php:5.6-fpm</span><span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get update<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y php5-dev php-pear php5-common<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#007f7f"># curl уже входит в образ 5.6-fpm но на всякие пожарные попробуем установить</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y curl libcurl4-openssl-dev<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install curl<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable curl<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#007f7f"># Устанавливаем все расширения</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install json<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable json<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y libpng-dev<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y libjpeg-dev<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install gd<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable gd<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y libxml2-dev<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install xml<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable xml<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install opcache<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable opcache<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install session<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable session<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install mbstring<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable mbstring<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install mysqli<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable mysqli<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install pdo<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable pdo<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install pdo_mysql<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable pdo_mysql<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y libpq-dev<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install pdo_pgsql<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable pdo_pgsql<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y php5-memcached<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> pecl install redis<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable redis<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-install pcntl<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable pcntl<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#007f7f"># Настройка xDebug (КЭП)</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> pecl install xdebug-2.3.2<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> docker-php-ext-enable xdebug<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> touch /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.remote_autostart=<span style="color:#fff;font-weight:bold">true</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.remote_mode=req &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.remote_handler=dbgp &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.remote_connect_back=<span style="color:#ff0;font-weight:bold">1</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.remote_port=<span style="color:#ff0;font-weight:bold">9000</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#007f7f"># RUN echo xdebug.remote_host=127.0.0.1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.idekey=PHPSTORM &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.remote_enable=<span style="color:#ff0;font-weight:bold">1</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.profiler_append=<span style="color:#ff0;font-weight:bold">0</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.profiler_enable=<span style="color:#ff0;font-weight:bold">0</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.profiler_enable_trigger=<span style="color:#ff0;font-weight:bold">1</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.profiler_output_dir=/var/debug &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.profiler_output_name=cachegrind.out.%s.%u &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.var_display_max_data=-1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.var_display_max_children=-1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> <span style="color:#fff;font-weight:bold">echo</span> xdebug.var_display_max_depth=-1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y geoip-bin geoip-database libgeoip-dev<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y php5-geoip<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> apt-get install -y wget<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> wget https://phar.phpunit.de/phpunit.phar<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> chmod +x phpunit.phar<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">RUN</span> mv phpunit.phar /usr/local/bin/phpunit<span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">WORKDIR</span><span style="color:#0ff;font-weight:bold"> /var/www</span><span style="color:#f00">
-</span><span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">CMD</span><span style="color:#0ff;font-weight:bold"> [&#34;php-fpm&#34;]</span></code></pre></div>
-<p>Собрать образ описаный в Dockerfile нужно при помощи команды docker build. Также можно легко эспортировать контейнер в сжатый архив и перенести руками готовую стстему без необходимости выкачивания ее из сети и сборки модулей. Для этого помогут команды
-<a href="https://docs.docker.com/reference/commandline/save/">save</a> и
-<a href="https://docs.docker.com/reference/commandline/load/">load</a> Для хранения данных в разных проектах мы используем
-<a href="https://hub.docker.com/_/mysql/">MySQL</a>,
-<a href="https://hub.docker.com/_/memcached/">memcached</a>,
-<a href="https://hub.docker.com/_/redis/">redis</a> и
-<a href="https://hub.docker.com/_/postgres/">PGSQL</a>, поднимем их в разных контейнерах. Бляго все они имеют официальные образы в Docker Hub и если нужно их расширить, то есть хорошая документация на страницах их образов. Для модификации конфигов и переобъявления к примеру пароля root пользователя для MySQL можно прописать это в Dockerfile ссылаясь на образ источник при помощи директивы FROM, так же как мы сделали для PHP. Имейте в виду что все что в нутри контейнера, при его падении/отключении пропадает безвозвратно, для того чтоб не терялись конфиги, и сами данные лучше пробрасывать файлы в хост через параметр для команды run -v, через Dockerfile это не получится сделать, или прописать через оркестрацию.</p>
-
-<p><strong>Оркестрация</strong></p>
-
-<p>Скачав и развернув все необходимые образы нам нужно объединить их при помощи параметра —link или сконфигурировать docker-compose.yml для удобного хранения конфига и последующего легкого модифицирования нашей связки. Чтоб постоянно не отправлять в контейнер файлы и сохранять данные из БД на хосте, конфиги для nginx, php, … тянуть с хоста. Если вы хотите обновлять ПО то лучше использовать Docker data container, а для разработки пробрасывать в хост то, что нужно. Для примера свяжем Nginx+PHP-FPM+MySQL+Memcached.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">fpm:
-  image: php-fpm-dev <span style="color:#007f7f">#наш контейнер со всеми необходимыми расширениями</span>
-  links:
-    - mysql
-    - memcached
-  volumes:
-    - ./:/var/www <span style="color:#007f7f"># подключаем проект к php-fpm</span>
-mysql:
-  image: mysql
-  volumes:
-    - ./data-mysql:/var/lib/mysql <span style="color:#007f7f"># сохранение файлов БД на хосте</span>
-  environment:
-    MYSQL_ROOT_PASSWORD: <span style="color:#ff0;font-weight:bold">12345</span>
-  ports:
-    - <span style="color:#ff0;font-weight:bold">3306</span>:<span style="color:#ff0;font-weight:bold">3306</span>
-memcached:
-  image: memcached
-  ports:
-    - <span style="color:#ff0;font-weight:bold">8080</span>:<span style="color:#ff0;font-weight:bold">1080</span>
-nginx:
-  image: nginx
-  links:
-    - fpm
-  ports:
-    - <span style="color:#ff0;font-weight:bold">80</span>:<span style="color:#ff0;font-weight:bold">80</span>
-    - <span style="color:#ff0;font-weight:bold">443</span>:<span style="color:#ff0;font-weight:bold">443</span>
-  volumes:
-    - ./:/var/www <span style="color:#007f7f"># подключаем проект к php-fpm, также можно использовать volumes_from для подключения разелов из других контейнеров</span>
-    - ./nginx:/etc/nginx/ <span style="color:#007f7f"># тянем настройки nginx из проекта</span></code></pre></div>
-<p>Теперь обратившись к хосту который мы прописали в конфиге nginx по 80 порту мы получим наши файлы из проекта. (естественно нужно настроить nginx для опроса нужной папки).</p>
-
-      </div>
-
-      <footer>
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-      </div>
-
-      <footer class="footer">
-  <section class="container">
-    
-      <p>Your ad could be here.</p>
-    
-     © 2018    ·  Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>. 
-  </section>
-</footer>
-
-    </main>
-
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-79837070-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-
-
-  </body>
-
-</html>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="Evgen Pyanykh"><meta name=description content="В работе мы используем много различных инструментов в каждом проекте и иногда они отличаются версиями и для запуска этих инструментов на локальной дев машине мы используем контейнеры для запуска в изолированной среде, где они не будут конфликтовать. Простой и удобный инструмент для подобных действий является Docker.
+Dockerfile
+Чтоб в последствии легко разворачивать подобные контейнеры нужно создать Dockerfile для создания снимка системы которым мы будем пользоваться в будущем. Пример создание php окружение с нужными расширениями уже внутри этого контейнера:"><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Развертывание среды разработки с помощью docker"><meta name=twitter:description content="В работе мы используем много различных инструментов в каждом проекте и иногда они отличаются версиями и для запуска этих инструментов на локальной дев машине мы используем контейнеры для запуска в изолированной среде, где они не будут конфликтовать. Простой и удобный инструмент для подобных действий является Docker.
+Dockerfile
+Чтоб в последствии легко разворачивать подобные контейнеры нужно создать Dockerfile для создания снимка системы которым мы будем пользоваться в будущем. Пример создание php окружение с нужными расширениями уже внутри этого контейнера:"><meta property="og:title" content="Развертывание среды разработки с помощью docker"><meta property="og:description" content="В работе мы используем много различных инструментов в каждом проекте и иногда они отличаются версиями и для запуска этих инструментов на локальной дев машине мы используем контейнеры для запуска в изолированной среде, где они не будут конфликтовать. Простой и удобный инструмент для подобных действий является Docker.
+Dockerfile
+Чтоб в последствии легко разворачивать подобные контейнеры нужно создать Dockerfile для создания снимка системы которым мы будем пользоваться в будущем. Пример создание php окружение с нужными расширениями уже внутри этого контейнера:"><meta property="og:type" content="article"><meta property="og:url" content="//bpt22.tech/posts/2015-11-08-%D1%80%D0%B0%D0%B7%D0%B2%D0%B5%D1%80%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D1%8B-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-docker/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2015-11-08T00:00:00+00:00"><meta property="article:modified_time" content="2015-11-08T00:00:00+00:00"><title>Развертывание среды разработки с помощью docker · Evgen Pyanykh</title><link rel=canonical href=//bpt22.tech/posts/2015-11-08-%D1%80%D0%B0%D0%B7%D0%B2%D0%B5%D1%80%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D1%8B-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-docker/><link rel=preload href="//bpt22.tech/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=//bpt22.tech/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=//bpt22.tech/img/little_w.png sizes=32x32><link rel=icon type=image/png href=//bpt22.tech/img/little_w.png sizes=16x16><link rel=apple-touch-icon href=//bpt22.tech/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=//bpt22.tech/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-light"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=//bpt22.tech>Evgen Pyanykh</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=//bpt22.tech/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=//bpt22.tech/skills/>Skills</a></li><li class=navigation-item><a class=navigation-link href=//bpt22.tech/contact/>Contact me</a></li><li class=navigation-item><a class=navigation-link href=//bpt22.tech/license/>License</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=//bpt22.tech/posts/2015-11-08-%D1%80%D0%B0%D0%B7%D0%B2%D0%B5%D1%80%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D1%8B-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-docker/>Развертывание среды разработки с помощью docker</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2015-11-08T00:00:00Z>2015-11-08</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+3-minute read</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=//bpt22.tech/categories/%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F/>АВТОМАТИЗАЦИЯ</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=//bpt22.tech/tags/development/>DEVELOPMENT</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/docker/>DOCKER</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/memcached/>MEMCACHED</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/mysql/>MYSQL</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/nginx/>NGINX</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/php-fpm/>PHP-FPM</a></span></div></div></header><div><p><img src=//bpt22.tech/img/dev-docker/834870999.jpg alt></p><p>В работе мы используем много различных инструментов в каждом проекте и иногда они отличаются версиями и для запуска этих инструментов на локальной дев машине мы используем контейнеры для запуска в изолированной среде, где они не будут конфликтовать. Простой и удобный инструмент для подобных действий является <a href=http://docker.com/>Docker</a>.</p><p><strong>Dockerfile</strong></p><p>Чтоб в последствии легко разворачивать подобные контейнеры нужно создать <a href=https://docs.docker.com/reference/builder/>Dockerfile</a> для создания снимка системы которым мы будем пользоваться в будущем. Пример создание php окружение с нужными расширениями уже внутри этого контейнера:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Dockerfile data-lang=Dockerfile><span style=display:flex><span><span style=color:#007f7f>#Dir for extensions config /usr/local/etc/php/conf.d/</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>FROM</span><span style=color:#0ff;font-weight:700> php:5.6-fpm</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get update<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y php5-dev php-pear php5-common<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#007f7f># curl уже входит в образ 5.6-fpm но на всякие пожарные попробуем установить</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y curl libcurl4-openssl-dev<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install curl<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable curl<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#007f7f># Устанавливаем все расширения</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install json<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable json<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y libpng-dev<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y libjpeg-dev<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install gd<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable gd<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y libxml2-dev<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install xml<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable xml<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install opcache<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable opcache<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install session<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable session<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install mbstring<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable mbstring<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install mysqli<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable mysqli<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install pdo<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable pdo<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install pdo_mysql<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable pdo_mysql<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y libpq-dev<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install pdo_pgsql<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable pdo_pgsql<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y php5-memcached<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> pecl install redis<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable redis<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-install pcntl<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable pcntl<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#007f7f># Настройка xDebug (КЭП)</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> pecl install xdebug-2.3.2<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> docker-php-ext-enable xdebug<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> touch /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.remote_autostart=<span style=color:#fff;font-weight:700>true</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.remote_mode=req &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.remote_handler=dbgp &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.remote_connect_back=<span style=color:#ff0;font-weight:700>1</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.remote_port=<span style=color:#ff0;font-weight:700>9000</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#007f7f># RUN echo xdebug.remote_host=127.0.0.1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.idekey=PHPSTORM &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.remote_enable=<span style=color:#ff0;font-weight:700>1</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.profiler_append=<span style=color:#ff0;font-weight:700>0</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.profiler_enable=<span style=color:#ff0;font-weight:700>0</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.profiler_enable_trigger=<span style=color:#ff0;font-weight:700>1</span> &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.profiler_output_dir=/var/debug &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.profiler_output_name=cachegrind.out.%s.%u &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.var_display_max_data=-1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.var_display_max_children=-1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> <span style=color:#fff;font-weight:700>echo</span> xdebug.var_display_max_depth=-1 &gt;&gt; /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y geoip-bin geoip-database libgeoip-dev<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y php5-geoip<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> apt-get install -y wget<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> wget https://phar.phpunit.de/phpunit.phar<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> chmod +x phpunit.phar<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>RUN</span> mv phpunit.phar /usr/local/bin/phpunit<span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>WORKDIR</span><span style=color:#0ff;font-weight:700> /var/www</span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red>
+</span></span></span><span style=display:flex><span><span style=color:red></span><span style=color:#fff;font-weight:700>CMD</span> [<span style=color:#0ff;font-weight:700>&#34;php-fpm&#34;</span>]<span style=color:red>
+</span></span></span></code></pre></div><p>Собрать образ описаный в Dockerfile нужно при помощи команды docker build. Также можно легко эспортировать контейнер в сжатый архив и перенести руками готовую стстему без необходимости выкачивания ее из сети и сборки модулей. Для этого помогут команды
+<a href=https://docs.docker.com/reference/commandline/save/>save</a> и
+<a href=https://docs.docker.com/reference/commandline/load/>load</a> Для хранения данных в разных проектах мы используем
+<a href=https://hub.docker.com/_/mysql/>MySQL</a>,
+<a href=https://hub.docker.com/_/memcached/>memcached</a>,
+<a href=https://hub.docker.com/_/redis/>redis</a> и
+<a href=https://hub.docker.com/_/postgres/>PGSQL</a>, поднимем их в разных контейнерах. Бляго все они имеют официальные образы в Docker Hub и если нужно их расширить, то есть хорошая документация на страницах их образов. Для модификации конфигов и переобъявления к примеру пароля root пользователя для MySQL можно прописать это в Dockerfile ссылаясь на образ источник при помощи директивы FROM, так же как мы сделали для PHP. Имейте в виду что все что в нутри контейнера, при его падении/отключении пропадает безвозвратно, для того чтоб не терялись конфиги, и сами данные лучше пробрасывать файлы в хост через параметр для команды run -v, через Dockerfile это не получится сделать, или прописать через оркестрацию.</p><p><strong>Оркестрация</strong></p><p>Скачав и развернув все необходимые образы нам нужно объединить их при помощи параметра —link или сконфигурировать docker-compose.yml для удобного хранения конфига и последующего легкого модифицирования нашей связки. Чтоб постоянно не отправлять в контейнер файлы и сохранять данные из БД на хосте, конфиги для nginx, php, … тянуть с хоста. Если вы хотите обновлять ПО то лучше использовать Docker data container, а для разработки пробрасывать в хост то, что нужно. Для примера свяжем Nginx+PHP-FPM+MySQL+Memcached.</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=font-weight:700>fpm</span>:
+</span></span><span style=display:flex><span>  <span style=font-weight:700>image</span>: php-fpm-dev <span style=color:#007f7f>#наш контейнер со всеми необходимыми расширениями</span>
+</span></span><span style=display:flex><span>  <span style=font-weight:700>links</span>:
+</span></span><span style=display:flex><span>    - mysql
+</span></span><span style=display:flex><span>    - memcached
+</span></span><span style=display:flex><span>  <span style=font-weight:700>volumes</span>:
+</span></span><span style=display:flex><span>    - ./:/var/www <span style=color:#007f7f># подключаем проект к php-fpm</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>mysql</span>:
+</span></span><span style=display:flex><span>  <span style=font-weight:700>image</span>: mysql
+</span></span><span style=display:flex><span>  <span style=font-weight:700>volumes</span>:
+</span></span><span style=display:flex><span>    - ./data-mysql:/var/lib/mysql <span style=color:#007f7f># сохранение файлов БД на хосте</span>
+</span></span><span style=display:flex><span>  <span style=font-weight:700>environment</span>:
+</span></span><span style=display:flex><span>    <span style=font-weight:700>MYSQL_ROOT_PASSWORD</span>: <span style=color:#ff0;font-weight:700>12345</span>
+</span></span><span style=display:flex><span>  <span style=font-weight:700>ports</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ff0;font-weight:700>3306</span>:<span style=color:#ff0;font-weight:700>3306</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>memcached</span>:
+</span></span><span style=display:flex><span>  <span style=font-weight:700>image</span>: memcached
+</span></span><span style=display:flex><span>  <span style=font-weight:700>ports</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ff0;font-weight:700>8080</span>:<span style=color:#ff0;font-weight:700>1080</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>nginx</span>:
+</span></span><span style=display:flex><span>  <span style=font-weight:700>image</span>: nginx
+</span></span><span style=display:flex><span>  <span style=font-weight:700>links</span>:
+</span></span><span style=display:flex><span>    - fpm
+</span></span><span style=display:flex><span>  <span style=font-weight:700>ports</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ff0;font-weight:700>80</span>:<span style=color:#ff0;font-weight:700>80</span>
+</span></span><span style=display:flex><span>    - <span style=color:#ff0;font-weight:700>443</span>:<span style=color:#ff0;font-weight:700>443</span>
+</span></span><span style=display:flex><span>  <span style=font-weight:700>volumes</span>:
+</span></span><span style=display:flex><span>    - ./:/var/www <span style=color:#007f7f># подключаем проект к php-fpm, также можно использовать volumes_from для подключения разелов из других контейнеров</span>
+</span></span><span style=display:flex><span>    - ./nginx:/etc/nginx/ <span style=color:#007f7f># тянем настройки nginx из проекта</span>
+</span></span></code></pre></div><p>Теперь обратившись к хосту который мы прописали в конфиге nginx по 80 порту мы получим наши файлы из проекта. (естественно нужно настроить nginx для опроса нужной папки).</p></div><footer></footer></article></section></div><footer class=footer><section class=container>©
+2022
+Evgen Pyanykh
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=//bpt22.tech/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script></body></html>
