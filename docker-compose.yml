@@ -1,12 +1,13 @@
-version: '2.1'
+version: '2.4'
 services:
   blog:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c 'hugo -d /usr/share/html/ && hugo server -b http://localhost:1313 --bind=0.0.0.0'
+    command: hugo server -b http://localhost:1313 --bind=0.0.0.0
+    working_dir: /usr/share/site/${SITE}
     ports:
       - 1313:1313
     volumes:
-      - ./site:/usr/share/blog
+      - ./site:/usr/share/site
       - ./html:/usr/share/html

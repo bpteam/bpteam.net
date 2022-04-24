@@ -1,0 +1,73 @@
+baseurl = "//bpt22.tech"
+title = "Evgen Pyanykh"
+
+theme = "coder"
+
+languagecode = "ru"
+
+paginate = 10
+canonifyurls = true
+
+pygmentsstyle = "w2"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+[params]
+    author = "Evgen Pyanykh"
+    description = "Evgen Pyanykh's personal website"
+    keywords = "blog,developer,personal"
+    info = "Full Stack DevOps and Magician"
+    avatarurl = "/img/big_b.png"
+    footercontent = "Your ad could be here."
+
+    favicon_32 = "/img/little_w.png"
+    favicon_16 = "/img/little_w.png"
+
+    dateformat = "2006-01-02"
+
+    hideCredits = false
+    hideCopyright = false
+
+    rtl = false
+
+    # Custom CSS
+    custom_css = []
+
+# Social links
+[[params.social]]
+    name = "Github"
+    icon = "fa fa-5x fa-brands fa-github fa-2"
+    weight = 1
+    url = "https://github.com/bpteam/"
+[[params.social]]
+    name = "e-mail"
+    icon = "fa fa-5x fa-envelope fa-2"
+    weight = 2
+    url = "mailto:bpteam22@gmail.com"
+
+
+
+[[menu.main]]
+    name = "Blog"
+    weight = 1
+    url  = "/posts/"
+#[[menu.main]]
+#    name = "About"
+#    weight = 2
+#    url = "/about/"
+[[menu.main]]
+    name = "Skills"
+    weight = 3
+    url = "/skills/"
+#[[menu.main]]
+#    name = "Projects"
+#    weight = 4
+#    url = "/projects/"
+[[menu.main]]
+    name = "Contact me"
+    weight = 5
+    url = "/contact/"
+[[menu.main]]
+    name = "License"
+    weight = 6
+    url = "/license/"

@@ -1,0 +1,117 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="Evgen Pyanykh"><meta name=description content="Иногда когда отключают интернет или ведутся технические работы и заняться нечем встает вопрос: «а закачал ли я фильм/сериал/передачу?». За частую ответ: «Нет!» :(. Для того чтоб не возникало подобных ситуаций я хочу развернуть на своем локальном сервере хранилище для офлайновой загрузки контента и не перегружать WiFi сеть постоянно работающими торрентами. В качестве ОС я выбрал Ubuntu server, потому что потому.
+Установка торрента
+Источник
+Устанавливаем torrent клиент «transmission». Он обладает удобным Web интерфейсом, который позволит нам останавливать или добавлять торренты в ручную."><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Автоматическое скачивание torrent из dropbox в ubuntu server"><meta name=twitter:description content="Иногда когда отключают интернет или ведутся технические работы и заняться нечем встает вопрос: «а закачал ли я фильм/сериал/передачу?». За частую ответ: «Нет!» :(. Для того чтоб не возникало подобных ситуаций я хочу развернуть на своем локальном сервере хранилище для офлайновой загрузки контента и не перегружать WiFi сеть постоянно работающими торрентами. В качестве ОС я выбрал Ubuntu server, потому что потому.
+Установка торрента
+Источник
+Устанавливаем torrent клиент «transmission». Он обладает удобным Web интерфейсом, который позволит нам останавливать или добавлять торренты в ручную."><meta property="og:title" content="Автоматическое скачивание torrent из dropbox в ubuntu server"><meta property="og:description" content="Иногда когда отключают интернет или ведутся технические работы и заняться нечем встает вопрос: «а закачал ли я фильм/сериал/передачу?». За частую ответ: «Нет!» :(. Для того чтоб не возникало подобных ситуаций я хочу развернуть на своем локальном сервере хранилище для офлайновой загрузки контента и не перегружать WiFi сеть постоянно работающими торрентами. В качестве ОС я выбрал Ubuntu server, потому что потому.
+Установка торрента
+Источник
+Устанавливаем torrent клиент «transmission». Он обладает удобным Web интерфейсом, который позволит нам останавливать или добавлять торренты в ручную."><meta property="og:type" content="article"><meta property="og:url" content="//bpt22.tech/posts/2015-05-24-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BA%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-torrent-%D0%B8%D0%B7-dropbox-%D0%B2-ubuntu-server/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2015-05-24T00:00:00+00:00"><meta property="article:modified_time" content="2015-05-24T00:00:00+00:00"><title>Автоматическое скачивание torrent из dropbox в ubuntu server · Evgen Pyanykh</title><link rel=canonical href=//bpt22.tech/posts/2015-05-24-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BA%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-torrent-%D0%B8%D0%B7-dropbox-%D0%B2-ubuntu-server/><link rel=preload href="//bpt22.tech/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=//bpt22.tech/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=//bpt22.tech/img/little_w.png sizes=32x32><link rel=icon type=image/png href=//bpt22.tech/img/little_w.png sizes=16x16><link rel=apple-touch-icon href=//bpt22.tech/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=//bpt22.tech/images/apple-touch-icon.png><meta name=generator content="Hugo 0.97.3"></head><body class="preload-transitions colorscheme-light"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=//bpt22.tech>Evgen Pyanykh</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=//bpt22.tech/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=//bpt22.tech/skills/>Skills</a></li><li class=navigation-item><a class=navigation-link href=//bpt22.tech/contact/>Contact me</a></li><li class=navigation-item><a class=navigation-link href=//bpt22.tech/license/>License</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=//bpt22.tech/posts/2015-05-24-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BA%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-torrent-%D0%B8%D0%B7-dropbox-%D0%B2-ubuntu-server/>Автоматическое скачивание torrent из dropbox в ubuntu server</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2015-05-24T00:00:00Z>2015-05-24</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+3-minute read</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=//bpt22.tech/categories/%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F/>АВТОМАТИЗАЦИЯ</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=//bpt22.tech/tags/dropbox/>DROPBOX</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/linux/>LINUX</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/pirates/>PIRATES</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/server/>SERVER</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/ubuntu/>UBUNTU</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=//bpt22.tech/tags/utorrent/>UTORRENT</a></span></div></div></header><div><p><img src=//bpt22.tech/img/Dropbox-uTorrent.png alt=img0></p><p>Иногда когда отключают интернет или ведутся технические работы и заняться нечем встает вопрос: «а закачал ли я фильм/сериал/передачу?». За частую ответ: «Нет!» :(. Для того чтоб не возникало подобных ситуаций я хочу развернуть на своем локальном сервере хранилище для офлайновой загрузки контента и не перегружать WiFi сеть постоянно работающими торрентами. В качестве ОС я выбрал Ubuntu server, потому что потому.</p><p><strong>Установка торрента</strong></p><p><a href=http://habrahabr.ru/post/145585/>Источник</a></p><p>Устанавливаем torrent клиент «transmission». Он обладает удобным Web интерфейсом, который позволит нам останавливать или добавлять торренты в ручную.</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get install transmission-daemon
+</span></span></code></pre></div><p>После установки остановим сервис и внесем необходимые конфигурации:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo service transmission-daemon stop
+</span></span><span style=display:flex><span>sudo nano /etc/transmission-daemon/settings.json
+</span></span></code></pre></div><p>Указываем папку для загрузки:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;download-dir&#39;: &#39;/mnt/myhdd/torrent&#39;
+</span></span></code></pre></div><p>Данные для доступа по веб интерфейсу:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;rpc-password&#39;: &#39;local&#39;
+</span></span><span style=display:flex><span>&#39;rpc-username&#39;: &#39;local&#39;
+</span></span></code></pre></div><p>Требовать аутентификацию для удаленного управления:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;rpc-authentication-required&#39;: true
+</span></span></code></pre></div><p>Включаем белый список для доступа к интерфейсу:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;rpc-whitelist&#39;: &#39;192.168.*.*&#39;
+</span></span></code></pre></div><p>Папка для не загруженных файлов:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;incomplete-dir&#39;: &#39;/arc/Incomplete&#39;
+</span></span></code></pre></div><p>Включение предыдущей опции:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;incomplete-dir-enabled&#39;: true
+</span></span></code></pre></div><p>Выставляем лимит на загрузку торрентов:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;download-limit&#39;: 1024
+</span></span><span style=display:flex><span>&#39;download-limit-enabled&#39;: true
+</span></span><span style=display:flex><span>&#39;upload-limit&#39;: 100
+</span></span><span style=display:flex><span>&#39;upload-limit-enabled&#39;: true
+</span></span></code></pre></div><p>Добавляем папки для слежения за ними и автоматической загрузки торрентов(эта папка должна быть доступна для чтения пользователю под которым запущен transmission):</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>&#39;watch-dir&#39;: &#39;/path/to/watch/dir&#39;
+</span></span><span style=display:flex><span>&#39;watch-dir-enabled&#39;: true
+</span></span></code></pre></div><p>Сохраняем настройки и запускаем сервис:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo service transmission-daemon start
+</span></span></code></pre></div><p>Доступ к интерфейсу предоставляется через 9091 порт.</p><p>http://192.168.1.180:9091/</p><p>Добавляем в крон задание при загрузке:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>@reboot /etc/init.d/transmission-daemon start
+</span></span></code></pre></div><p><strong>Установка DropBox</strong></p><p><a href=http://ubuntovod.ru/instructions/dropbox-ubuntu-server.html>Источник</a></p><p>Скачиваем DropBox</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>wget -O dropbox.tar.gz ‘http://www.dropbox.com/download/?plat=lnx.x86’ <span style=color:#007f7f>#32 разрядная ОС</span>
+</span></span><span style=display:flex><span>wget -O dropbox.tar.gz ‘http://www.dropbox.com/download/?plat=lnx.x86_64’ <span style=color:#007f7f>#64 разрядная ОС</span>
+</span></span></code></pre></div><p>Распаковываем архив</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>tar -xvzf dropbox.tar.gz
+</span></span></code></pre></div><p>Запускаем</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>.dropbox-dist/dropboxd
+</span></span></code></pre></div><p>DropBox нам выдаст ссылку для верификации компьютера. Переходим по ссылке и входим в свою учетную запись для верификации сервера. После подтверждения начнется синхронизация, прервем ее и настроим демона.</p><p>Создадим файл /etc/init.d/dropbox со следующим содержимым:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#0f0;font-weight:700>#!/bin/sh
+</span></span></span><span style=display:flex><span><span style=color:#0f0;font-weight:700></span><span style=color:#007f7f>#dropbox service</span>
+</span></span><span style=display:flex><span>DBU=<span style=color:#0ff;font-weight:700>&#39;user_name&#39;</span> <span style=color:#007f7f>#Ваш пользователь в системе под которым будет работать DropBox</span>
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>DAEMON=<span style=color:#0ff;font-weight:700>&#39;/path/to/.dropbox-dist/dropboxd&#39;</span> <span style=color:#007f7f>#адрес к исполняемому файлу</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>HOMEDIR=<span style=color:#0ff;font-weight:700>&#39;/home/&#39;</span>$DBU<span style=color:#0ff;font-weight:700>&#39;/Dropbox&#39;</span> <span style=color:#007f7f>#Папка для синхронизации</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>start() {
+</span></span><span style=display:flex><span>   <span style=color:#fff;font-weight:700>echo</span> <span style=color:#0ff;font-weight:700>&#39;Starting dropbox...&#39;</span>
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>if</span> [ -x $DAEMON ]; <span style=color:#fff;font-weight:700>then</span>
+</span></span><span style=display:flex><span>           HOME=$HOMEDIR start-stop-daemon -b -o -c $DBU -S -u $DBU -x $DAEMON
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>fi</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>stop() {
+</span></span><span style=display:flex><span>   <span style=color:#fff;font-weight:700>echo</span> <span style=color:#0ff;font-weight:700>&#39;Stopping dropbox...&#39;</span>
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>if</span> [ -x $DAEMON ]; <span style=color:#fff;font-weight:700>then</span>
+</span></span><span style=display:flex><span>           start-stop-daemon -o -c $DBU -K -u $DBU -x $DAEMON
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>fi</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>status() {
+</span></span><span style=display:flex><span>       dbpid=<span style=color:#0ff;font-weight:700>`</span>pgrep -u $DBU dropbox<span style=color:#0ff;font-weight:700>`</span>
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>if</span> [ -z $dbpid ] ; <span style=color:#fff;font-weight:700>then</span>
+</span></span><span style=display:flex><span>           <span style=color:#fff;font-weight:700>echo</span> <span style=color:#0ff;font-weight:700>&#39;dropboxd for USER &#39;</span>$DBU<span style=color:#0ff;font-weight:700>&#39;: not running.&#39;</span>
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>else</span>
+</span></span><span style=display:flex><span>           <span style=color:#fff;font-weight:700>echo</span> <span style=color:#0ff;font-weight:700>&#39;dropboxd for USER &#39;</span>$DBU<span style=color:#0ff;font-weight:700>&#39;: running (pid &#39;</span>$dbpid<span style=color:#0ff;font-weight:700>&#39;)&#39;</span>
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>fi</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>case</span> $1 in
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>   start)
+</span></span><span style=display:flex><span>       start
+</span></span><span style=display:flex><span>       ;;
+</span></span><span style=display:flex><span>   stop)
+</span></span><span style=display:flex><span>       stop
+</span></span><span style=display:flex><span>       ;;
+</span></span><span style=display:flex><span>   restart|reload|force-reload)
+</span></span><span style=display:flex><span>       stop
+</span></span><span style=display:flex><span>       start
+</span></span><span style=display:flex><span>       ;;
+</span></span><span style=display:flex><span>   status)
+</span></span><span style=display:flex><span>       status
+</span></span><span style=display:flex><span>       ;;
+</span></span><span style=display:flex><span>   *)
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>echo</span> <span style=color:#0ff;font-weight:700>&#39;Usage: /etc/init.d/dropbox {start|stop|reload|force-reload|restart|status}&#39;</span>
+</span></span><span style=display:flex><span>       <span style=color:#fff;font-weight:700>exit</span> <span style=color:#ff0;font-weight:700>1</span>
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>esac</span>
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>exit</span> <span style=color:#ff0;font-weight:700>0</span>
+</span></span></code></pre></div><p>Добавляем права на запуск</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo chmod +x /etc/init.d/dropbox &amp;&amp; sudo update-rc.d dropbox defaults
+</span></span></code></pre></div><p>Далее можно управлять DropBox командами:</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo service dropbox start <span style=color:#007f7f># Запуск Dropbox</span>
+</span></span><span style=display:flex><span>sudo service dropbox stop <span style=color:#007f7f># Остановка Dropbox</span>
+</span></span><span style=display:flex><span>sudo service dropbox restart <span style=color:#007f7f># Перезапуск Dropbox</span>
+</span></span><span style=display:flex><span>sudo service dropbox status <span style=color:#007f7f># Состояние Dropbox</span>
+</span></span></code></pre></div><p>Добавим команду в крон</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>@reboot /etc/init.d/dropbox start
+</span></span></code></pre></div><p>Все готово, теперь transmission будет ставить в очередь для закачки все torrent файлы из папки установленной в опции watch-dir. Можно из любого места добавить torrent в DropBox и он вас будет ждать дома.</p><p><strong>Просмотр файлов</strong></p><p>Для удобного потребления контента можно воспользоваться проигрователем который поддерживает просмотр файлов по сети. Изначально я остановился на веб ориентированом менеджере Ampache, он позволяет скачивать файлы, просматривать их в потоке и смотреть через Web плеер, но к сажелению своей функциональностью он меня не зацепил ибо был избыточен в использовании и прямое его назначение стрим музыки. По этому было решено использовать родной XBMC(ныне Kodi).</p><p>Подключаться к серверу мы будем через SFTP, он идет по умолчанию с OpenSSH и как мне кажется очень удобен, так как Kodi поддерживает его из коробки. Перейдем к делу.</p><p>Скачаем и установим Kodi с официального сайта. В основном меню выберем Video ->Add video->Browse->Add network location.
+В предложеном списке найдем SFTP, введем наши настройки сервера и сохраним.</p><p><img src=//bpt22.tech/img/Screenshot_021015_053038_AM.jpg alt=img1></p><p>В разделе Video появится наша папку с фильмами и названием которое вы введете.</p><p><img src=//bpt22.tech/img/Screenshot_021015_053302_AM.jpg alt=img2></p><p>Единственно что теперь вас может остановить, это отключение электричества.</p></div><footer></footer></article></section></div><footer class=footer><section class=container>©
+2022
+Evgen Pyanykh
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=//bpt22.tech/js/coder.min.8fb86376a16e684af472a329aef502dbebcfab65ce264e9750d144912947c602.js integrity="sha256-j7hjdqFuaEr0cqMprvUC2+vPq2XOJk6XUNFEkSlHxgI="></script></body></html>

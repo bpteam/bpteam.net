@@ -1,0 +1,13 @@
+version: '2.4'
+services:
+  web:
+    image: bpt22:latest
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '5'
+      driver: json-file
+    ports:
+      - 80:80
+    volumes:
+      - ./../html:/usr/share/html/
