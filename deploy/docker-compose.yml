@@ -2,6 +2,8 @@ version: '2.4'
 services:
   web:
     image: bpt22:latest
+    build:
+      context: .
     logging:
       options:
         max-size: '1m'
