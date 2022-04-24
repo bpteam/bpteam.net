@@ -1,5 +1,5 @@
-baseurl = "http://bpteam.net"
-#baseurl = "http://localhost:1313"
+# baseurl = "//bpt22.tech"
+baseurl = "http://localhost:1313"
 title = "Evgen Pyanykh"
 
 theme = "coder"
@@ -12,8 +12,6 @@ canonifyurls = true
 pygmentsstyle = "b2"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
-
-googleAnalytics = "UA-79837070-1"
 
 [params]
     author = "Evgen Pyanykh"
