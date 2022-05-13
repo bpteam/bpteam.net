@@ -1,6 +1,7 @@
 version: '2.4'
 services:
   serve:
+    image: hugo:local
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,6 +13,7 @@ services:
       - ./site:/usr/share/site
       - ./html:/usr/share/html
   render:
+    image: hugo:local
     build:
       context: .
       dockerfile: Dockerfile
