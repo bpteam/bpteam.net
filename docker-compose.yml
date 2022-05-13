@@ -1,10 +1,21 @@
 version: '2.4'
 services:
-  blog:
+  serve:
     build:
       context: .
       dockerfile: Dockerfile
     command: hugo server -b http://localhost:1313 --bind=0.0.0.0
+    working_dir: /usr/share/site/${SITE}
+    ports:
+      - 1313:1313
+    volumes:
+      - ./site:/usr/share/site
+      - ./html:/usr/share/html
+  render:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:  hugo --minify --cleanDestinationDir --destination /usr/share/html/${SITE}
     working_dir: /usr/share/site/${SITE}
     ports:
       - 1313:1313
