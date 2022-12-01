@@ -23,11 +23,11 @@ Dockerfile
 Удобство заключается в том, что пользователю не нужно постоянно просматривать сайт на наличие интересующих его проектов. Выбрав интересующею категорию проектов и вводит перечень ключевых слов через пробел и в последствии скрипт с выбранной периодичностью заходит на сайт и проверяет проекты и сканирует текст на наличие ключевых слов.</description></item><item><title>Скрипты для автоматизации работы с любым GUI</title><link>//bpt22.tech/posts/2015-05-22-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D0%BB%D1%8E%D0%B1%D1%8B%D0%BC%D0%B8-gui/</link><pubDate>Fri, 22 May 2015 00:00:00 +0000</pubDate><guid>//bpt22.tech/posts/2015-05-22-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D0%BB%D1%8E%D0%B1%D1%8B%D0%BC%D0%B8-gui/</guid><description>Автоматическое тестирование GUI иногда становится невозможным по причине отсутствия инструментов для осуществления его. Давно я наткнулся на инструмент SikuliX который работает с экраном и для него не важно в какой оболочке работает тестируемый объект. Некоторые скажут, что с этим инструментом можно кликать курсором в определенную область и вводить данные, без возможности обработать полученные данные в ответ, но с недавних пор в SikuliX внедрили распознавание текста с помощью OCR Tesseract. SikuliX поддерживает программирование на Jython и использование сочетаний клавиш системы.</description></item><item><title>404: Page not found</title><link>//bpt22.tech/404/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>//bpt22.tech/404/</guid><description>The page you are looking for does not exist.</description></item><item><title>Contacts</title><link>//bpt22.tech/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>//bpt22.tech/contact/</guid><description>CV
 bpteam22@gmail.com
 Blog
-fl.ru
 GitHub
 LinkedIn
-LiveCoding
 +380668637437
-@bpteam22
-bpteam22</description></item><item><title>License</title><link>//bpt22.tech/license/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>//bpt22.tech/license/</guid><description>All blog posts are copyrighted by me and may not be reproduced without my permission.
+@bpt22
+bpteam22
+LiveCoding
+fl.ru</description></item><item><title>License</title><link>//bpt22.tech/license/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>//bpt22.tech/license/</guid><description>All blog posts are copyrighted by me and may not be reproduced without my permission.
 All code samples are licensed under the MIT License, implying that you can use them as you see fit.</description></item><item><title>Skills</title><link>//bpt22.tech/skills/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>//bpt22.tech/skills/</guid><description>Generation date 2018-10-03</description></item></channel></rss>
